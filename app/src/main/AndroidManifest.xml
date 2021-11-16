@@ -10,6 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClassicCarSelling">
         <activity
+            android:name=".ui.activity.OderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.InfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.BrandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.SignInActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>

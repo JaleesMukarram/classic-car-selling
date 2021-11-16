@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "103596023191",
+    "project_id": "classic-car-selling",
+    "storage_bucket": "classic-car-selling.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103596023191:android:a594154e8ea789a2ab38d2",
+        "android_client_info": {
+          "package_name": "com.android.classiccarselling"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103596023191-eejlkg2n7eee31ua44p09gnc8k2lrfjj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2FlzEF3p_6NJ7AnAwhN6L82SoCTf5Awo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103596023191-eejlkg2n7eee31ua44p09gnc8k2lrfjj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
