@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Classic Car Selling</string>
+    <string name="content_description">Image Icon</string>
+    <string name="sign_in">Sign In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
