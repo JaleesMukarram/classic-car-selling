@@ -1,16 +1,50 @@
 package com.android.classiccarselling.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 
 import com.android.classiccarselling.R;
+import com.android.classiccarselling.databinding.ActivityMainBinding;
+import com.android.classiccarselling.interfaces.CustomHooks;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CustomHooks {
+
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        callHooks();
+    }
+
+    @Override
+    public void callHooks() {
+
+        initViews();
+        initListeners();
+    }
+
+    @Override
+    public void handleIntent() {
+
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initListeners() {
+
+    }
+
+    @Override
+    public void observe() {
+
     }
 }
