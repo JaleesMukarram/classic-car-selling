@@ -13,4 +13,6 @@
     <string name="wishlist">Wishlist</string>
     <string name="saved">Saved</string>
     <string name="selangor">Selangor</string>
+    <string name="order_checklist">Order Checklist</string>
+    <string name="confirm_order">Confirm Order</string>
 </resources>
