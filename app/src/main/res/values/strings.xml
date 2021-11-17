@@ -8,4 +8,9 @@
     <string name="sign_up">Sign Up</string>
     <string name="search_cars">Search Cars</string>
     <string name="brand">Brand</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="notifications">Notifications</string>
+    <string name="wishlist">Wishlist</string>
+    <string name="saved">Saved</string>
+    <string name="selangor">Selangor</string>
 </resources>
