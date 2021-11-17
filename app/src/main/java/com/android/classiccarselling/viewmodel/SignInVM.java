@@ -8,23 +8,24 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
-public class SignUpVM extends ViewModel {
+public class SignInVM extends ViewModel {
 
     private final FirebaseAuth firebaseAuth;
 
-    public MutableLiveData<FirebaseUser> newUser = new MutableLiveData<>();
+    public MutableLiveData<FirebaseUser> signedInUser = new MutableLiveData<>();
     public MutableLiveData<Exception> error = new MutableLiveData<>();
 
-    public SignUpVM() {
+    public SignInVM() {
 
         firebaseAuth = FirebaseAuth.getInstance();
-        newUser.setValue(firebaseAuth.getCurrentUser());
+        firebaseAuth.signOut();
+        signedInUser.setValue(firebaseAuth.getCurrentUser());
 
     }
 
-    public void signUp(String email, String password) {
+    public void signIn(String email, String password) {
 
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
 
             if (!task.isSuccessful()) {
 
@@ -32,7 +33,9 @@ public class SignUpVM extends ViewModel {
                 return;
             }
 
-            newUser.setValue(Objects.requireNonNull(task.getResult()).getUser());
+            signedInUser.setValue(Objects.requireNonNull(task.getResult()).getUser());
         });
     }
+
+
 }
