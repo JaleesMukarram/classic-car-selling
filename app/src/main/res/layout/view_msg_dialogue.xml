@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="shortMessage"
+            type="String" />
+
+        <variable
+            name="longMessage"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="16dp">
+
+        <ProgressBar
+            android:id="@+id/PBRWorking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TVShortMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/PBRWorking"
+            android:layout_centerHorizontal="true"
+            android:text="@{shortMessage}"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/PBRWorking"
+            app:layout_constraintStart_toStartOf="@+id/PBRWorking"
+            app:layout_constraintTop_toBottomOf="@+id/PBRWorking"
+            tools:text="Please wait..." />
+
+        <TextView
+            android:id="@+id/TVLongMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TVShortMessage"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:text="@{longMessage}"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TVShortMessage"
+            tools:text="Please wait while we are processing your information" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
