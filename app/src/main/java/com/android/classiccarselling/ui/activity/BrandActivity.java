@@ -5,7 +5,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 
-import com.android.classiccarselling.BrandAdapter;
+import com.android.classiccarselling.adapters.BrandAdapter;
 import com.android.classiccarselling.R;
 import com.android.classiccarselling.databinding.ActivityBrandBinding;
 import com.android.classiccarselling.interfaces.CustomHooks;

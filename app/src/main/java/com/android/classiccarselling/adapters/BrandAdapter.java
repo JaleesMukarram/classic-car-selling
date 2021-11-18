@@ -1,4 +1,4 @@
-package com.android.classiccarselling;
+package com.android.classiccarselling.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

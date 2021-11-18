@@ -18,7 +18,7 @@ public class SignInVM extends ViewModel {
     public SignInVM() {
 
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuth.signOut();
+//        firebaseAuth.signOut();
         signedInUser.setValue(firebaseAuth.getCurrentUser());
 
     }

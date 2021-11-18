@@ -15,4 +15,5 @@
     <string name="selangor">Selangor</string>
     <string name="order_checklist">Order Checklist</string>
     <string name="confirm_order">Confirm Order</string>
+    <string name="price">Price</string>
 </resources>
