@@ -11,6 +11,7 @@ import com.android.classiccarselling.R;
 import com.android.classiccarselling.databinding.ActivityOrderBinding;
 import com.android.classiccarselling.interfaces.CustomHooks;
 import com.android.classiccarselling.model.Car;
+import com.squareup.picasso.Picasso;
 
 public class OrderActivity extends AppCompatActivity implements CustomHooks {
 
@@ -48,6 +49,9 @@ public class OrderActivity extends AppCompatActivity implements CustomHooks {
     @Override
     public void initViews() {
 
+        binding.setCar(car);
+        Picasso.get().load(car.getImages().get(0).getDownloadURL())
+                .into(binding.imageView9);
     }
 
     @Override
