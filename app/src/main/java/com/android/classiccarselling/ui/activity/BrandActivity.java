@@ -42,10 +42,10 @@ public class BrandActivity extends AppCompatActivity implements CustomHooks {
     public void initViews() {
 
         List<Brand> brandList = new ArrayList<>();
-        brandList.add(new Brand(R.drawable.bmw));
-        brandList.add(new Brand(R.drawable.bmw));
-        brandList.add(new Brand(R.drawable.bmw));
-        brandList.add(new Brand(R.drawable.bmw));
+//        brandList.add(new Brand(R.drawable.bmw));
+//        brandList.add(new Brand(R.drawable.bmw));
+//        brandList.add(new Brand(R.drawable.bmw));
+//        brandList.add(new Brand(R.drawable.bmw));
 
         BrandAdapter adapter = new BrandAdapter(brandList);
         binding.rvBrand.setAdapter(adapter);

@@ -31,7 +31,7 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.BrandVH> {
     @Override
     public void onBindViewHolder(@NonNull BrandVH holder, int position) {
 
-        holder.binding.imageView2.setImageResource(brandList.get(position).getResource());
+//        holder.binding.imageView2.setImageResource(brandList.get(position).getResource());
     }
 
     @Override
