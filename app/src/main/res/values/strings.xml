@@ -16,4 +16,8 @@
     <string name="order_checklist">Order Checklist</string>
     <string name="confirm_order">Confirm Order</string>
     <string name="price">Price</string>
+    <string name="name">Name</string>
+    <string name="location">Location</string>
+    <string name="skip">Skip</string>
+    <string name="save_information">Save Information</string>
 </resources>

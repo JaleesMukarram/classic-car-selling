@@ -88,7 +88,7 @@ public class SignUpActivity extends AppCompatActivity implements CustomHooks {
 
                 cancelDialogue();
                 Toast.makeText(SignUpActivity.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
-                CommonUtils.changeActivity(this, MainActivity.class, true);
+                CommonUtils.changeActivity(this, ProfileActivity.class, true);
             }
 
         });
