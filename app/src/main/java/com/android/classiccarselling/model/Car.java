@@ -1,9 +1,12 @@
 package com.android.classiccarselling.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 import java.util.UUID;
 
-public class Car {
+public class Car implements Parcelable {
 
     private String id;
 
@@ -33,6 +36,30 @@ public class Car {
         this.price = price;
         this.images = images;
     }
+
+    protected Car(Parcel in) {
+        id = in.readString();
+        brand = in.readString();
+        name = in.readString();
+        year = in.readString();
+        registrationDate = in.readString();
+        color = in.readString();
+        kilometer = in.readString();
+        price = in.readDouble();
+        images = in.createTypedArrayList(StorageImage.CREATOR);
+    }
+
+    public static final Creator<Car> CREATOR = new Creator<Car>() {
+        @Override
+        public Car createFromParcel(Parcel in) {
+            return new Car(in);
+        }
+
+        @Override
+        public Car[] newArray(int size) {
+            return new Car[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -100,5 +127,33 @@ public class Car {
 
     public void setImages(List<StorageImage> images) {
         this.images = images;
+    }
+
+    public String getFullName() {
+
+        return this.brand + " " + this.name;
+    }
+
+    public String getListedPrice() {
+
+        return "RM" + this.price;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(brand);
+        parcel.writeString(name);
+        parcel.writeString(year);
+        parcel.writeString(registrationDate);
+        parcel.writeString(color);
+        parcel.writeString(kilometer);
+        parcel.writeDouble(price);
+        parcel.writeTypedList(images);
     }
 }

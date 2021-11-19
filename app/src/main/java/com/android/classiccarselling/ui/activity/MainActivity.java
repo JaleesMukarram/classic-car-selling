@@ -2,8 +2,10 @@ package com.android.classiccarselling.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.android.classiccarselling.R;
@@ -13,13 +15,18 @@ import com.android.classiccarselling.interfaces.CustomHooks;
 import com.android.classiccarselling.model.Brand;
 import com.android.classiccarselling.model.Car;
 import com.android.classiccarselling.utils.CommonUtils;
+import com.android.classiccarselling.viewmodel.MainVM;
+import com.android.classiccarselling.viewmodel.SignInVM;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements CustomHooks {
 
+    private static final String TAG = "MainActivityTAG";
     private ActivityMainBinding binding;
+    private MainVM viewModel;
+    private CarAdapter carAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
 
         initViews();
         initListeners();
+        observe();
     }
 
     @Override
@@ -44,11 +52,7 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
     @Override
     public void initViews() {
 
-        List<Car> carList = new ArrayList<>();
-        carList.add(new Car("Yoshi", "507", "2021", "2020", "Fog Black", "200Km", 4400, null));
-
-        binding.rvCars.setAdapter(new CarAdapter(this,carList));
-
+        viewModel = ViewModelProviders.of(this).get(MainVM.class);
     }
 
     @Override
@@ -61,5 +65,15 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
     @Override
     public void observe() {
 
+        viewModel.cars.observe(this, cars -> {
+
+            if (cars != null) {
+
+                carAdapter = new CarAdapter(this, cars);
+                binding.rvCars.setAdapter(carAdapter);
+            }
+        });
+
+        viewModel.getAllCars();
     }
 }
