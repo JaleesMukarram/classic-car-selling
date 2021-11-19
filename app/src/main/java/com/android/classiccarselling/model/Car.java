@@ -7,7 +7,7 @@ public class Car {
 
     private String id;
 
-    private Brand brand;
+    private String brand;
     private String name;
 
     private String year;
@@ -22,7 +22,7 @@ public class Car {
     public Car() {
     }
 
-    public Car(Brand brand, String name, String year, String registrationDate, String color, String kilometer, double price, List<StorageImage> images) {
+    public Car(String brand, String name, String year, String registrationDate, String color, String kilometer, double price, List<StorageImage> images) {
         this.id = UUID.randomUUID().toString();
         this.brand = brand;
         this.name = name;
@@ -34,11 +34,15 @@ public class Car {
         this.images = images;
     }
 
-    public Brand getBrand() {
+    public String getId() {
+        return id;
+    }
+
+    public String getBrand() {
         return brand;
     }
 
-    public void setBrand(Brand brand) {
+    public void setBrand(String brand) {
         this.brand = brand;
     }
 

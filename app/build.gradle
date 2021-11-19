@@ -72,4 +72,7 @@ dependencies {
 
     implementation "android.arch.lifecycle:extensions:1.1.1"
     implementation "android.arch.lifecycle:viewmodel:1.1.1"
+
+    //Picasso for images better loading and showing
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

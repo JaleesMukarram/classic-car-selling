@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
     public void initViews() {
 
         List<Car> carList = new ArrayList<>();
-        carList.add(new Car(new Brand(R.drawable.bmw), "507", "2021", "2020", "Fog Black", "200Km", 4400, null));
+        carList.add(new Car("Yoshi", "507", "2021", "2020", "Fog Black", "200Km", 4400, null));
 
         binding.rvCars.setAdapter(new CarAdapter(this,carList));
 
