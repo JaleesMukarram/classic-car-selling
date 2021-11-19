@@ -1,33 +1,21 @@
 package com.android.classiccarselling.ui.activity;
 
-import static com.android.classiccarselling.global.Constants.CARS_INTENT_KEY;
-import static com.android.classiccarselling.global.Constants.CAR_INTENT_KEY;
 import static com.android.classiccarselling.global.Constants.FILTER_BRAND_INTENT_KEY;
+
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
-
 import com.android.classiccarselling.R;
 import com.android.classiccarselling.adapters.CarAdapter;
 import com.android.classiccarselling.databinding.ActivityMainBinding;
 import com.android.classiccarselling.interfaces.CustomHooks;
-import com.android.classiccarselling.model.Brand;
-import com.android.classiccarselling.model.Car;
 import com.android.classiccarselling.utils.CommonUtils;
 import com.android.classiccarselling.viewmodel.MainVM;
-import com.android.classiccarselling.viewmodel.SignInVM;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements CustomHooks {
 
@@ -74,9 +62,7 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
 
             if (carAdapter != null) {
 
-                Intent intent = new Intent(this, BrandActivity.class);
-                intent.putExtra(CARS_INTENT_KEY, (Parcelable) carAdapter.getCarList());
-                startActivity(intent);
+                CommonUtils.changeActivity(this, BrandActivity.class, false);
             }
         });
 

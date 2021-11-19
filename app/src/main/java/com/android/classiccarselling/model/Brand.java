@@ -10,6 +10,8 @@ public class Brand {
     private String name;
     private StorageImage image;
 
+    public Brand() {
+    }
 
     public Brand(String name, StorageImage image) {
         this.id = UUID.randomUUID().toString();

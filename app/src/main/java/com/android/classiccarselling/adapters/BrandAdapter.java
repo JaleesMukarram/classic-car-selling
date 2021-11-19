@@ -1,6 +1,11 @@
 package com.android.classiccarselling.adapters;
 
+import static com.android.classiccarselling.global.Constants.FILTER_BRAND_INTENT_KEY;
+
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -8,14 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.classiccarselling.databinding.ItemBrandBinding;
 import com.android.classiccarselling.model.Brand;
+import com.android.classiccarselling.ui.activity.MainActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.BrandVH> {
 
+    private final Context context;
     private final List<Brand> brandList;
 
-    public BrandAdapter(List<Brand> brandList) {
+    public BrandAdapter(Context context, List<Brand> brandList) {
+        this.context = context;
         this.brandList = brandList;
 
     }
@@ -31,7 +40,16 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.BrandVH> {
     @Override
     public void onBindViewHolder(@NonNull BrandVH holder, int position) {
 
-//        holder.binding.imageView2.setImageResource(brandList.get(position).getResource());
+        Picasso.get().load(brandList.get(position).getImage().getDownloadURL())
+                .into(holder.binding.imageView2);
+
+        holder.binding.rootContainer.setOnClickListener(view -> {
+
+            Intent intent = new Intent(context, MainActivity.class);
+            intent.putExtra(FILTER_BRAND_INTENT_KEY, brandList.get(position).getName().toLowerCase());
+            context.startActivity(intent);
+        });
+
     }
 
     @Override
@@ -41,7 +59,7 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.BrandVH> {
 
     static class BrandVH extends RecyclerView.ViewHolder {
 
-        private ItemBrandBinding binding;
+        private final ItemBrandBinding binding;
 
         public BrandVH(@NonNull ItemBrandBinding binding) {
             super(binding.getRoot());

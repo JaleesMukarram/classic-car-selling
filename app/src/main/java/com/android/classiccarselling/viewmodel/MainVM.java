@@ -1,10 +1,12 @@
 package com.android.classiccarselling.viewmodel;
 
+import static com.android.classiccarselling.global.Constants.BRANDS_COLLECTION;
 import static com.android.classiccarselling.global.Constants.CARS_COLLECTION;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.android.classiccarselling.model.Brand;
 import com.android.classiccarselling.model.Car;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -19,6 +21,7 @@ public class MainVM extends ViewModel {
     private final FirebaseAuth firebaseAuth;
     private final FirebaseFirestore db;
     public final MutableLiveData<List<Car>> cars = new MutableLiveData<>();
+    public final MutableLiveData<List<Brand>> brands = new MutableLiveData<>();
 
     public MainVM() {
 
@@ -46,6 +49,29 @@ public class MainVM extends ViewModel {
                     }
 
                     cars.setValue(carList);
+                });
+    }
+
+    public void getBrands() {
+
+        db.collection(BRANDS_COLLECTION)
+                .get()
+                .addOnCompleteListener(task -> {
+
+                    if (!task.isSuccessful()) {
+
+                        return;
+                    }
+
+                    List<Brand> brandList = new ArrayList<>();
+
+                    for (DocumentSnapshot snapshot : Objects.requireNonNull(task.getResult())) {
+
+                        Brand car = snapshot.toObject(Brand.class);
+                        brandList.add(car);
+                    }
+
+                    brands.setValue(brandList);
                 });
     }
 }
