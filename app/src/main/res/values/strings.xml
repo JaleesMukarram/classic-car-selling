@@ -20,4 +20,5 @@
     <string name="location">Location</string>
     <string name="skip">Skip</string>
     <string name="save_information">Save Information</string>
+    <string name="city">City</string>
 </resources>
