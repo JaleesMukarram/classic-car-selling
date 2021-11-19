@@ -5,6 +5,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 
@@ -60,6 +62,27 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
 
         binding.ivProfile.setOnClickListener(view -> CommonUtils.changeActivity(this, InfoActivity.class, false));
         binding.ivMenu.setOnClickListener(view -> CommonUtils.changeActivity(this, BrandActivity.class, false));
+
+        binding.etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                if (carAdapter != null) {
+
+                    carAdapter.searchFilter(charSequence.toString().toLowerCase());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     @Override

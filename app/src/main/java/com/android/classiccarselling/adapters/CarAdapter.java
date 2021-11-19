@@ -17,16 +17,19 @@ import com.android.classiccarselling.ui.activity.OrderActivity;
 import com.android.classiccarselling.utils.CommonUtils;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
 
-    private Context context;
+    private final Context context;
     private final List<Car> carList;
+    private final List<Car> filteredList;
 
     public CarAdapter(Context context, List<Car> carList) {
         this.context = context;
         this.carList = carList;
+        this.filteredList = new ArrayList<>(carList);
     }
 
     @NonNull
@@ -40,7 +43,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
     @Override
     public void onBindViewHolder(@NonNull CarVH holder, int position) {
 
-        Car car = carList.get(position);
+        Car car = filteredList.get(position);
 
         holder.carBinding.tvName.setText(car.getFullName());
         holder.carBinding.tvPrice.setText(car.getListedPrice());
@@ -57,7 +60,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
 
     @Override
     public int getItemCount() {
-        return carList.size();
+        return filteredList.size();
     }
 
     static class CarVH extends RecyclerView.ViewHolder {
@@ -68,5 +71,26 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
             super(itemCarBinding.getRoot());
             carBinding = itemCarBinding;
         }
+    }
+
+    public void searchFilter(String lowerKeyWord) {
+
+        filteredList.clear();
+
+        if (lowerKeyWord.isEmpty()) {
+
+            filteredList.addAll(carList);
+            return;
+        }
+
+
+        for (Car car : carList) {
+
+            if (car.getFullName().toLowerCase().contains(lowerKeyWord)) {
+                filteredList.add(car);
+            }
+        }
+
+        notifyDataSetChanged();
     }
 }

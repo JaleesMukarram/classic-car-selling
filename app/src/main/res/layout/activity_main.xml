@@ -62,7 +62,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/etSearch"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:autofillHints="search"
