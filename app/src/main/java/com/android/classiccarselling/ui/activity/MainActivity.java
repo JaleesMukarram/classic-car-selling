@@ -1,10 +1,16 @@
 package com.android.classiccarselling.ui.activity;
 
+import static com.android.classiccarselling.global.Constants.CARS_INTENT_KEY;
+import static com.android.classiccarselling.global.Constants.CAR_INTENT_KEY;
+import static com.android.classiccarselling.global.Constants.FILTER_BRAND_INTENT_KEY;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -29,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
     private ActivityMainBinding binding;
     private MainVM viewModel;
     private CarAdapter carAdapter;
+    private String brandFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
     @Override
     public void callHooks() {
 
+        handleIntent();
         initViews();
         initListeners();
         observe();
@@ -49,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
     @Override
     public void handleIntent() {
 
+        brandFilter = getIntent().getStringExtra(FILTER_BRAND_INTENT_KEY);
     }
 
     @Override
@@ -61,7 +70,15 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
     public void initListeners() {
 
         binding.ivProfile.setOnClickListener(view -> CommonUtils.changeActivity(this, InfoActivity.class, false));
-        binding.ivMenu.setOnClickListener(view -> CommonUtils.changeActivity(this, BrandActivity.class, false));
+        binding.ivMenu.setOnClickListener(view -> {
+
+            if (carAdapter != null) {
+
+                Intent intent = new Intent(this, BrandActivity.class);
+                intent.putExtra(CARS_INTENT_KEY, (Parcelable) carAdapter.getCarList());
+                startActivity(intent);
+            }
+        });
 
         binding.etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -93,6 +110,12 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
             if (cars != null) {
 
                 carAdapter = new CarAdapter(this, cars);
+
+                if (brandFilter != null) {
+
+                    carAdapter.searchFilter(brandFilter);
+                }
+
                 binding.rvCars.setAdapter(carAdapter);
             }
         });

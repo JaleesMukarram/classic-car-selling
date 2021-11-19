@@ -93,4 +93,8 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
 
         notifyDataSetChanged();
     }
+
+    public List<Car> getCarList() {
+        return carList;
+    }
 }
