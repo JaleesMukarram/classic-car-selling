@@ -1,5 +1,6 @@
 package com.android.classiccarselling.adapters;
 
+import static com.android.classiccarselling.global.Constants.CART_COLLECTION;
 import static com.android.classiccarselling.global.Constants.CAR_INTENT_KEY;
 
 import android.app.Activity;
@@ -7,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -28,6 +30,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
     private final Context context;
     private final List<Car> carList;
     private final List<Car> filteredList;
+    private Cart cart;
 
     public CarAdapter(Context context, List<Car> carList) {
         this.context = context;
@@ -64,9 +67,17 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
 
         holder.carBinding.mcvRootContainer.setOnClickListener(view -> {
 
-            Intent intent = new Intent(context, OrderActivity.class);
-            intent.putExtra(CAR_INTENT_KEY, car);
-            context.startActivity(intent);
+            if (cart != null) {
+
+                Intent intent = new Intent(context, OrderActivity.class);
+                intent.putExtra(CAR_INTENT_KEY, car);
+                intent.putExtra(CART_COLLECTION, cart);
+                context.startActivity(intent);
+
+            } else {
+
+                Toast.makeText(context, "Cart not ready", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -76,6 +87,8 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
     }
 
     public void reflectCart(Cart cart) {
+
+        this.cart = cart;
 
         for (Car car : carList) {
 
