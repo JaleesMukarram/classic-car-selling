@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.classiccarselling.R;
 import com.android.classiccarselling.adapters.CarAdapter;
@@ -87,6 +88,12 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
 
             }
         });
+
+        binding.srlCarsContainer.setOnRefreshListener(() -> {
+
+            viewModel.getAllCars();
+            binding.etSearch.setText("");
+        });
     }
 
     @Override
@@ -111,10 +118,12 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
 
         viewModel.cart.observe(this, cart -> {
 
-            if (cart != null && carAdapter != null){
+            if (cart != null && carAdapter != null) {
 
                 carAdapter.reflectCart(cart);
             }
+
+            binding.srlCarsContainer.setRefreshing(false);
 
         });
 
@@ -126,6 +135,13 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
             }
 
         });
+
+        viewModel.getAllCars();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         viewModel.getAllCars();
     }
