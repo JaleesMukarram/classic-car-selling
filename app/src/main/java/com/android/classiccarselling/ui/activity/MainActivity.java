@@ -5,6 +5,7 @@ import static com.android.classiccarselling.global.Constants.FILTER_BRAND_INTENT
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -103,7 +104,27 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
                 }
 
                 binding.rvCars.setAdapter(carAdapter);
+
+                viewModel.getMyCart();
             }
+        });
+
+        viewModel.cart.observe(this, cart -> {
+
+            if (cart != null && carAdapter != null){
+
+                carAdapter.reflectCart(cart);
+            }
+
+        });
+
+        viewModel.error.observe(this, error -> {
+
+            if (error != null) {
+
+                Toast.makeText(this, "error: " + error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+
         });
 
         viewModel.getAllCars();

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.classiccarselling.databinding.ItemCarBinding;
 import com.android.classiccarselling.model.Car;
+import com.android.classiccarselling.model.Cart;
 import com.android.classiccarselling.ui.activity.OrderActivity;
 import com.android.classiccarselling.utils.CommonUtils;
 import com.squareup.picasso.Picasso;
@@ -61,6 +62,11 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
     @Override
     public int getItemCount() {
         return filteredList.size();
+    }
+
+    public void reflectCart(Cart cart) {
+
+
     }
 
     static class CarVH extends RecyclerView.ViewHolder {
