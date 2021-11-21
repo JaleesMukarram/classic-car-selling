@@ -1,6 +1,7 @@
 package com.android.classiccarselling.adapters;
 
 import static com.android.classiccarselling.global.Constants.CART_COLLECTION;
+import static com.android.classiccarselling.global.Constants.CART_INTENT_KEY;
 import static com.android.classiccarselling.global.Constants.CAR_INTENT_KEY;
 
 import android.app.Activity;
@@ -71,7 +72,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
 
                 Intent intent = new Intent(context, OrderActivity.class);
                 intent.putExtra(CAR_INTENT_KEY, car);
-                intent.putExtra(CART_COLLECTION, cart);
+                intent.putExtra(CART_INTENT_KEY, cart);
                 context.startActivity(intent);
 
             } else {
