@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.classiccarselling.R;
 import com.android.classiccarselling.databinding.ItemCarBinding;
 import com.android.classiccarselling.model.Car;
 import com.android.classiccarselling.model.Cart;
@@ -45,11 +47,20 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
     public void onBindViewHolder(@NonNull CarVH holder, int position) {
 
         Car car = filteredList.get(position);
+        holder.carBinding.setCar(car);
 
-        holder.carBinding.tvName.setText(car.getFullName());
-        holder.carBinding.tvPrice.setText(car.getListedPrice());
         Picasso.get().load(car.getImages().get(0).getDownloadURL())
                 .into(holder.carBinding.ivCar);
+
+        if (car.isInCart()) {
+
+            holder.carBinding.ivCart.setColorFilter(ContextCompat.getColor(context, R.color.colorOrange), android.graphics.PorterDuff.Mode.MULTIPLY);
+
+        } else {
+
+            holder.carBinding.ivCart.setColorFilter(ContextCompat.getColor(context, R.color.black), android.graphics.PorterDuff.Mode.MULTIPLY);
+
+        }
 
         holder.carBinding.mcvRootContainer.setOnClickListener(view -> {
 
@@ -66,7 +77,16 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
 
     public void reflectCart(Cart cart) {
 
+        for (Car car : carList) {
 
+            if (cart.getCarIds().contains(car.getId())) {
+                car.setInCart(true);
+            }
+        }
+
+        filteredList.clear();
+        filteredList.addAll(carList);
+        notifyDataSetChanged();
     }
 
     static class CarVH extends RecyclerView.ViewHolder {

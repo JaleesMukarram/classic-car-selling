@@ -3,6 +3,8 @@ package com.android.classiccarselling.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +19,9 @@ public class Car implements Parcelable {
     private String registrationDate;
     private String color;
     private String kilometer;
+
+    @Exclude
+    private boolean inCart;
 
     private double price;
 
@@ -142,6 +147,16 @@ public class Car implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    @Exclude
+    public boolean isInCart() {
+        return inCart;
+    }
+
+    @Exclude
+    public void setInCart(boolean inCart) {
+        this.inCart = inCart;
     }
 
     @Override
