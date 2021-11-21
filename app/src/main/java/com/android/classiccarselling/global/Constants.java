@@ -13,4 +13,6 @@ public class Constants {
     public static final String CAR_INTENT_KEY = "car";
 
     public static final String FILTER_BRAND_INTENT_KEY = "car";
+
+    public static final String CART_COLLECTION = "carts";
 }
