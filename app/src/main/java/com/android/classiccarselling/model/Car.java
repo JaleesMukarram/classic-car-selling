@@ -144,6 +144,11 @@ public class Car implements Parcelable {
         return "RM" + this.price;
     }
 
+    public String getInfoForCart() {
+
+        return this.getFullName() + " @ " + getListedPrice() + "\n";
+    }
+
     @Override
     public int describeContents() {
         return 0;

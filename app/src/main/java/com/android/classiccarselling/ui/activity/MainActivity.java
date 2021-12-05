@@ -10,11 +10,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.classiccarselling.R;
 import com.android.classiccarselling.adapters.CarAdapter;
 import com.android.classiccarselling.databinding.ActivityMainBinding;
+import com.android.classiccarselling.dialog.CartBuyDialog;
 import com.android.classiccarselling.interfaces.CustomHooks;
 import com.android.classiccarselling.utils.CommonUtils;
 import com.android.classiccarselling.viewmodel.MainVM;
@@ -59,7 +59,20 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
     @Override
     public void initListeners() {
 
-        binding.ivProfile.setOnClickListener(view -> CommonUtils.changeActivity(this, InfoActivity.class, false));
+        binding.ivProfile.setOnClickListener(view -> {
+
+            if (carAdapter != null) {
+
+
+                CommonUtils.changeActivity(this, InfoActivity.class, false);
+
+            } else {
+
+                Toast.makeText(this, "Please wait while loading cart", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
         binding.ivMenu.setOnClickListener(view -> {
 
             if (carAdapter != null) {

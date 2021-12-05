@@ -6,9 +6,12 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.classiccarselling.R;
+import com.android.classiccarselling.adapters.CarAdapter;
 import com.android.classiccarselling.databinding.ActivityInfoBinding;
+import com.android.classiccarselling.dialog.CartBuyDialog;
 import com.android.classiccarselling.interfaces.CustomHooks;
 import com.android.classiccarselling.utils.CommonUtils;
 import com.android.classiccarselling.viewmodel.ProfileVM;
@@ -48,6 +51,10 @@ public class InfoActivity extends AppCompatActivity implements CustomHooks {
     @Override
     public void initListeners() {
 
+        binding.textView9.setOnClickListener(v -> showCartCheckout());
+        binding.imageView7.setOnClickListener(v -> showCartCheckout());
+        binding.textView10.setOnClickListener(v -> showCartCheckout());
+        binding.imageView8.setOnClickListener(v -> showCartCheckout());
     }
 
     @Override
@@ -64,5 +71,19 @@ public class InfoActivity extends AppCompatActivity implements CustomHooks {
         });
 
         viewModel.getSavedUser();
+    }
+
+    private void showCartCheckout() {
+
+        if (CarAdapter.carList.isEmpty()) {
+
+            Toast.makeText(this, "No Items", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String[] cartData = CarAdapter.getCartCarsFormatted();
+
+        CartBuyDialog dialogue = new CartBuyDialog(this);
+        dialogue.show(cartData[0], cartData[1]);
     }
 }

@@ -52,7 +52,7 @@ public class BrandActivity extends AppCompatActivity implements CustomHooks {
     @Override
     public void initListeners() {
 
-        binding.ivProfile.setOnClickListener(view -> CommonUtils.changeActivity(this, InfoActivity.class, false));
+//        binding.ivProfile.setOnClickListener(view -> CommonUtils.changeActivity(this, InfoActivity.class, false));
     }
 
     @Override

@@ -25,14 +25,14 @@ import java.util.List;
 
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
 
+    public static List<Car> carList;
     private final Context context;
-    private final List<Car> carList;
     private final List<Car> filteredList;
     private Cart cart;
 
     public CarAdapter(Context context, List<Car> carList) {
         this.context = context;
-        this.carList = carList;
+        CarAdapter.carList = carList;
         this.filteredList = new ArrayList<>(carList);
     }
 
@@ -96,6 +96,29 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
         }
 
         notifyDataSetChanged();
+    }
+
+    public static String[] getCartCarsFormatted() {
+
+        String[] cartInfo = new String[2];
+
+        StringBuilder carInfoBuilder = new StringBuilder();
+
+        double totalPrice = 0.0d;
+
+        for (Car car : carList) {
+
+            if (car.isInCart()) {
+
+                carInfoBuilder.append(car.getInfoForCart());
+                totalPrice += car.getPrice();
+            }
+        }
+
+        cartInfo[0] = carInfoBuilder.toString();
+        cartInfo[1] = "Total: " + totalPrice;
+
+        return cartInfo;
     }
 
     static class CarVH extends RecyclerView.ViewHolder {

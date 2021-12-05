@@ -22,4 +22,6 @@
     <string name="skip">Skip</string>
     <string name="save_information">Save Information</string>
     <string name="city">City</string>
+    <string name="cars_in_cart">Cars in Cart</string>
+    <string name="checkout_order">Checkout Order</string>
 </resources>
