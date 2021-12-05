@@ -13,27 +13,51 @@ import com.android.classiccarselling.databinding.DialogCartBuyBinding;
 
 public class CartBuyDialog {
 
-    private AlertDialog.Builder mBuilder;
-    private DialogCartBuyBinding mBinding;
-
     private final Activity homeScreen;
+    private Dialog mDialog;
+    private Checkout checkout;
 
-    public CartBuyDialog(Activity homeScreen) {
+
+    public CartBuyDialog(Activity homeScreen, Checkout checkout) {
         this.homeScreen = homeScreen;
+        this.checkout = checkout;
     }
 
     public void show(String cars, String price) {
 
-        mBinding = DataBindingUtil.inflate(homeScreen.getLayoutInflater(), R.layout.dialog_cart_buy, null, false);
-        mBinding.tvCars.setText(cars);
-        mBinding.tvPrice.setText(price);
+        DialogCartBuyBinding binding = DataBindingUtil.inflate(homeScreen.getLayoutInflater(), R.layout.dialog_cart_buy, null, false);
 
-        View mView = mBinding.getRoot();
+        binding.tvCars.setText(cars);
+        binding.tvPrice.setText(price);
+        binding.btnOrder.setOnClickListener(v -> {
 
-        mBuilder = new AlertDialog.Builder(homeScreen);
-        mBuilder.setView(mView);
+            binding.btnOrder.setEnabled(false);
+            binding.progressBar.setVisibility(View.VISIBLE);
+            checkout.onCheckOut();
+        });
 
-        Dialog mDialog = mBuilder.create();
+        View view = binding.getRoot();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(homeScreen);
+        builder.setView(view);
+
+        mDialog = builder.create();
         mDialog.show();
+    }
+
+    public void cancel() {
+
+        try {
+
+            mDialog.cancel();
+
+        } catch (Exception ignored) {
+
+        }
+    }
+
+    public interface Checkout {
+
+        void onCheckOut();
     }
 }

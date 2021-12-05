@@ -15,11 +15,14 @@ import com.android.classiccarselling.dialog.CartBuyDialog;
 import com.android.classiccarselling.interfaces.CustomHooks;
 import com.android.classiccarselling.utils.CommonUtils;
 import com.android.classiccarselling.viewmodel.ProfileVM;
+import com.google.firebase.firestore.FieldValue;
 
 public class InfoActivity extends AppCompatActivity implements CustomHooks {
 
     private ActivityInfoBinding binding;
     private ProfileVM viewModel;
+
+    private CartBuyDialog dialogue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +73,22 @@ public class InfoActivity extends AppCompatActivity implements CustomHooks {
             }
         });
 
+        viewModel.cartCleared.observe(this, cartCleared -> {
+
+            if (dialogue != null) {
+
+                dialogue.cancel();
+                Toast.makeText(this, "Checkout Successful", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
         viewModel.getSavedUser();
     }
 
     private void showCartCheckout() {
 
-        if (CarAdapter.carList.isEmpty()) {
+        if (CarAdapter.carList.isEmpty() || !CarAdapter.cartHasCar()) {
 
             Toast.makeText(this, "No Items", Toast.LENGTH_SHORT).show();
             return;
@@ -83,7 +96,8 @@ public class InfoActivity extends AppCompatActivity implements CustomHooks {
 
         String[] cartData = CarAdapter.getCartCarsFormatted();
 
-        CartBuyDialog dialogue = new CartBuyDialog(this);
+        dialogue = new CartBuyDialog(this, () -> viewModel.clearCart());
+
         dialogue.show(cartData[0], cartData[1]);
     }
 }

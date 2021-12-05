@@ -98,6 +98,18 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
         notifyDataSetChanged();
     }
 
+    public static boolean cartHasCar() {
+
+        for (Car car : carList) {
+
+            if (car.isInCart()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static String[] getCartCarsFormatted() {
 
         String[] cartInfo = new String[2];
@@ -116,7 +128,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
         }
 
         cartInfo[0] = carInfoBuilder.toString();
-        cartInfo[1] = "Total: " + totalPrice;
+        cartInfo[1] = "Total: RM" + totalPrice;
 
         return cartInfo;
     }

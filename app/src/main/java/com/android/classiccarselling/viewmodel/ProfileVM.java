@@ -1,5 +1,6 @@
 package com.android.classiccarselling.viewmodel;
 
+import static com.android.classiccarselling.global.Constants.CART_COLLECTION;
 import static com.android.classiccarselling.global.Constants.USER_INFO_COLLECTION;
 
 import androidx.lifecycle.MutableLiveData;
@@ -10,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class ProfileVM extends ViewModel {
@@ -21,6 +23,9 @@ public class ProfileVM extends ViewModel {
 
     public final MutableLiveData<User> updatedUser = new MutableLiveData<>();
     public final MutableLiveData<User> defaultUser = new MutableLiveData<>();
+
+    public MutableLiveData<Boolean> cartCleared = new MutableLiveData<>();
+
 
     public final MutableLiveData<Exception> error = new MutableLiveData<>();
 
@@ -70,4 +75,22 @@ public class ProfileVM extends ViewModel {
             }
         });
     }
+
+    public void clearCart() {
+
+        db.collection(CART_COLLECTION)
+                .document(firebaseAuth.getUid())
+                .update("carIds", new ArrayList<String>())
+                .addOnCompleteListener(task -> {
+
+                    if (!task.isSuccessful()) {
+
+                        error.setValue(task.getException());
+                        return;
+                    }
+
+                    cartCleared.setValue(true);
+                });
+    }
+
 }
