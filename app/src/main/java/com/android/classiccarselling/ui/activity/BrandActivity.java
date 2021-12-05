@@ -11,6 +11,7 @@ import com.android.classiccarselling.R;
 import com.android.classiccarselling.databinding.ActivityBrandBinding;
 import com.android.classiccarselling.interfaces.CustomHooks;
 import com.android.classiccarselling.model.Brand;
+import com.android.classiccarselling.utils.CommonUtils;
 import com.android.classiccarselling.viewmodel.MainVM;
 
 import java.util.ArrayList;
@@ -51,6 +52,7 @@ public class BrandActivity extends AppCompatActivity implements CustomHooks {
     @Override
     public void initListeners() {
 
+        binding.ivProfile.setOnClickListener(view -> CommonUtils.changeActivity(this, InfoActivity.class, false));
     }
 
     @Override

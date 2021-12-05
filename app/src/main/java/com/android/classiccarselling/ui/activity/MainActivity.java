@@ -104,13 +104,13 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
             if (cars != null) {
 
                 carAdapter = new CarAdapter(this, cars);
+                binding.rvCars.setAdapter(carAdapter);
 
                 if (brandFilter != null) {
 
                     carAdapter.searchFilter(brandFilter);
+                    binding.etSearch.setText(brandFilter);
                 }
-
-                binding.rvCars.setAdapter(carAdapter);
 
                 viewModel.getMyCart();
             }
@@ -136,7 +136,6 @@ public class MainActivity extends AppCompatActivity implements CustomHooks {
 
         });
 
-        viewModel.getAllCars();
     }
 
     @Override

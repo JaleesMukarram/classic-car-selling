@@ -1,10 +1,8 @@
 package com.android.classiccarselling.adapters;
 
-import static com.android.classiccarselling.global.Constants.CART_COLLECTION;
 import static com.android.classiccarselling.global.Constants.CART_INTENT_KEY;
 import static com.android.classiccarselling.global.Constants.CAR_INTENT_KEY;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -20,7 +18,6 @@ import com.android.classiccarselling.databinding.ItemCarBinding;
 import com.android.classiccarselling.model.Car;
 import com.android.classiccarselling.model.Cart;
 import com.android.classiccarselling.ui.activity.OrderActivity;
-import com.android.classiccarselling.utils.CommonUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -98,8 +95,6 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarVH> {
             }
         }
 
-        filteredList.clear();
-        filteredList.addAll(carList);
         notifyDataSetChanged();
     }
 
