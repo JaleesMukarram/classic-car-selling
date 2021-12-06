@@ -93,4 +93,8 @@ public class ProfileVM extends ViewModel {
                 });
     }
 
+    public void logOut() {
+
+        firebaseAuth.signOut();
+    }
 }
